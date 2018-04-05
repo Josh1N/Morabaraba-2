@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Morabaraba..2")]
+[assembly: AssemblyTitle("Morabaraba-2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Morabaraba..2")]
+[assembly: AssemblyProduct("Morabaraba-2")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f8a84f11-a707-4417-9ff1-a3c6b0ca452a")]
+[assembly: Guid("c1da6f61-1a78-4b5c-b2d6-4e36fcfc6f4b")]
 
 // Version information for an assembly consists of the following four values:
 //
