@@ -37,25 +37,73 @@ namespace Morabaraba_2
         Player black = new Player();
         Player white = new Player();
 
-        //public void SwitchPlayer(Player x)
-        //{
-        //    //first check if position is valid then
+        //board positions
+        public static string A1 = "A1";
+        public static string A4 = "A4";
+        public static string A7 = "A7";
+        public static string B2 = "B2";
+        public static string B4 = "B4";
+        public static string B6 = "B6";
+        public static string C3 = "C3";
+        public static string C4 = "C4";
+        public static string C5 = "C5";
+        public static string D1 = "D1";
+        public static string D2 = "D2";
+        public static string D3 = "D3";
+        public static string D5 = "D5";
+        public static string D6 = "D6";
+        public static string D7 = "D7";
+        public static string E3 = "E3";
+        public static string E4 = "E4";
+        public static string E5 = "E5";
+        public static string F2 = "F2";
+        public static string F4 = "F4";
+        public static string F6 = "F6";
+        public static string G1 = "G1";
+        public static string G4 = "G4";
+        public static string G7 = "G7";
 
-        //    //if(pos == validmove){
-        //    x = black;
 
-        //    switch (x)
-        //    {
-        //        case black: x = white;
-        //            break;
-        //        case white: x = black;
-        //            break;
+        public bool ValidPos(string pos)
+        {
+            if (Positions.Contains(pos))
+            {
+                return true;
+            }
+            return false;
+        }
 
-        //    }
-            
-                
-            
-        //}
+        public void SwitchPlayer(Player x)
+        {
+            //first check if position is valid then
+
+           // if (ValidPos()
+            //{
+
+
+                if (x == black)
+                {
+                    x = white;
+                }
+                else
+                    x = black;
+            //}
+            //switch (x)
+            //{
+            //    case black:
+            //        white;
+            //        break;
+            //    case white:
+            //        x = black;
+            //        break;
+
+            //}
+
+
+
+        }
+
+
 
         static void runGame()//player currentPlayer) // an object of type player needs to be created
         {
@@ -80,19 +128,19 @@ namespace Morabaraba_2
         public static List<string> rows = new List<string>() // need to figure out how to circumanvigate escape character 
         {
              "  1  2  3  4  5  6  7  \n",
-            string.Format("A {0}--------{1}--------{2}  \n", Positions[0], Positions[1], Positions[2]),
+            string.Format("A {0}--------{1}--------{2}  \n", A1, A4, A7),
             "  | '      |       |  \n",
-            string.Format("B |  {0}-----{1}-----{2}  |  \n","B2","B4","B6"),
+            string.Format("B |  {0}-----{1}-----{2}  |  \n",B2,B4,B6),
             "  |  | '   |   / |  |  \n",
-            string.Format("C |  |  {0}--{1}--{2}  |  |  \n","C3","C4","C5"),
+            string.Format("C |  |  {0}--{1}--{2}  |  |  \n",C3,C4,C5),
             "  |  |  |     |  |  |  \n",
-            string.Format("D {0}--{1}--{2}     {3}--{4}--{5}  \n","D1","D2","D3", "D5", "D6", "D7"),
+            string.Format("D {0}--{1}--{2}     {3}--{4}--{5}  \n",D1,D2,D3, D5, D6, D7),
             "  |  |  |     |  |  |  \n",
-            string.Format("E |  |  {0}--{1}--{2}  |  |  \n","E3","E4","E5"),
+            string.Format("E |  |  {0}--{1}--{2}  |  |  \n",E3,E4,E5),
             "  |  | /   |   ' |  |  \n",
-            string.Format("F |  {0}-----{1}-----{2}  |  \n","F2","F4","F6"),
+            string.Format("F |  {0}-----{1}-----{2}  |  \n",F2,F4,F6),
             "  | /      |      ' |  \n",
-            string.Format("G {0}--------{1}--------{2}  \n\n","G1","G4","G7")
+            string.Format("G {0}--------{1}--------{2}  \n\n",G1,G4,G7)
         };
 
 
