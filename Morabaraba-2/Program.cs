@@ -27,11 +27,35 @@ namespace Morabaraba_2
    *      -> if their OnBoard is less than 3, the other player has won.
    *         
    */
-
-        public string[] Positions = { "A1", "A4", "A7", "B2","B4","B6", "C3","C4","C5","D1","D2","D3", "D5", "D6", "D7","E3","E4","E5","F2","F4","F6","G1","G4","G7" };
+        //for the Positions list, when a player selects a position we can change that position to B or W to update the board and use the availablePositions list to add and remove positions that have been played
+        public static List<string> Positions = new List<string> { "A1", "A4", "A7", "B2","B4","B6", "C3","C4","C5","D1","D2","D3", "D5", "D6", "D7","E3","E4","E5","F2","F4","F6","G1","G4","G7" };
+        public List<string> availablePositions = new List<string> { "A1", "A4", "A7", "B2", "B4", "B6", "C3", "C4", "C5", "D1", "D2", "D3", "D5", "D6", "D7", "E3", "E4", "E5", "F2", "F4", "F6", "G1", "G4", "G7" };
 
         public List<string> UnplacedCows  = new List<string>(); //NEED TO KNOW WHETHER TO MAKE TWO LISTS (ONE) FOR EACH PLAYER SO AS TO KNOW HOW TO KEEP TO TRACK OF WHO HAS WHICH COWS
         public List<string> onBoardCows = new List<string>();
+
+        Player black = new Player();
+        Player white = new Player();
+
+        //public void SwitchPlayer(Player x)
+        //{
+        //    //first check if position is valid then
+
+        //    //if(pos == validmove){
+        //    x = black;
+
+        //    switch (x)
+        //    {
+        //        case black: x = white;
+        //            break;
+        //        case white: x = black;
+        //            break;
+
+        //    }
+            
+                
+            
+        //}
 
         static void runGame()//player currentPlayer) // an object of type player needs to be created
         {
@@ -56,7 +80,7 @@ namespace Morabaraba_2
         public static List<string> rows = new List<string>() // need to figure out how to circumanvigate escape character 
         {
              "  1  2  3  4  5  6  7  \n",
-            string.Format("A {0}--------{1}--------{2}  \n","A1","A4","A7"),
+            string.Format("A {0}--------{1}--------{2}  \n", Positions[0], Positions[1], Positions[2]),
             "  | '      |       |  \n",
             string.Format("B |  {0}-----{1}-----{2}  |  \n","B2","B4","B6"),
             "  |  | '   |   / |  |  \n",
@@ -88,6 +112,17 @@ namespace Morabaraba_2
         
 
         }
+
+        //public static void Placing(string pos)
+        //{
+        //    pos = Console.ReadLine().ToUpper();
+
+        //    if 
+        //    switch (pos)
+        //    {
+        //        case "A1" = "B"
+        //    }
+        //}
 
         static void Main(string[] args)
         {
