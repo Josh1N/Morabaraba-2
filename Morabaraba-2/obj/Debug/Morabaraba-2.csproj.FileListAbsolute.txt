@@ -19,3 +19,10 @@ c:\users\g16n6925\source\repos\Morabaraba-2\Morabaraba-2\obj\Debug\Morabaraba-2.
 \\ict.ru.ac.za\DFS\UGHomes\g16r4659\Desktop\Morabaraba-2\Morabaraba-2\obj\Debug\Morabaraba-2.csproj.CoreCompileInputs.cache
 \\ict.ru.ac.za\DFS\UGHomes\g16r4659\Desktop\Morabaraba-2\Morabaraba-2\obj\Debug\Morabaraba-2.exe
 \\ict.ru.ac.za\DFS\UGHomes\g16r4659\Desktop\Morabaraba-2\Morabaraba-2\obj\Debug\Morabaraba-2.pdb
+C:\Users\dell\Desktop\Morabaraba-2\Morabaraba-2\bin\Debug\Morabaraba-2.exe.config
+C:\Users\dell\Desktop\Morabaraba-2\Morabaraba-2\bin\Debug\Morabaraba-2.exe
+C:\Users\dell\Desktop\Morabaraba-2\Morabaraba-2\bin\Debug\Morabaraba-2.pdb
+C:\Users\dell\Desktop\Morabaraba-2\Morabaraba-2\obj\Debug\Morabaraba-2.csprojResolveAssemblyReference.cache
+C:\Users\dell\Desktop\Morabaraba-2\Morabaraba-2\obj\Debug\Morabaraba-2.csproj.CoreCompileInputs.cache
+C:\Users\dell\Desktop\Morabaraba-2\Morabaraba-2\obj\Debug\Morabaraba-2.exe
+C:\Users\dell\Desktop\Morabaraba-2\Morabaraba-2\obj\Debug\Morabaraba-2.pdb

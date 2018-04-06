@@ -64,6 +64,7 @@ namespace Morabaraba_2
         public static string G7 = "G7";
 
 
+
         public bool ValidPos(string pos)
         {
             if (Positions.Contains(pos))
@@ -154,23 +155,21 @@ namespace Morabaraba_2
             foreach (string r in var)
             {
                 Console.WriteLine(r);
-            }
-
-
-        
+            }        
 
         }
 
-        //public static void Placing(string pos)
-        //{
-        //    pos = Console.ReadLine().ToUpper();
+        public static void Placing(string pos)
+        {
+            // pos = Console.ReadLine().ToUpper();
 
-        //    if 
-        //    switch (pos)
-        //    {
-        //        case "A1" = "B"
-        //    }
-        //}
+                  switch (pos)
+            {       case "A1" :
+                    Positions.Remove(pos);
+                    A1 = "B";
+                    break;
+            }
+        }
 
         static void Main(string[] args)
         {
@@ -180,6 +179,14 @@ namespace Morabaraba_2
 
           
 
+            printGameBoard(rows);
+
+            Console.WriteLine("Enter position to place cow.");
+           
+            string ans = Console.ReadLine();
+            Console.Clear();
+            Placing(ans);
+            Console.WriteLine(Positions);
             printGameBoard(rows);
             Console.ReadLine();
            // runGame(player currentPlayer); // an object of type player needs to be created 

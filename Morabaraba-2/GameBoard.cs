@@ -8,7 +8,7 @@ namespace Morabaraba_2
 {
     //class GameBoard
     //{
-    //    // public List<Cell> Cells { get; set; }
+    //    public List<Cell> Cells { get; set; }
 
     //    //public GameBoard
     //    //    {
