@@ -53,15 +53,14 @@ namespace Morabaraba_2
         }
 
 
-
-        private List<string> rows = new List<string>() // need to figure out how to circumanvigate escape character 
+        public static List<string> rows = new List<string>() // need to figure out how to circumanvigate escape character 
         {
              "  1  2  3  4  5  6  7  \n",
             string.Format("A {0}--------{1}--------{2}  \n","A1","A4","A7"),
             "  | '      |       |  \n",
-            string.Format("B |  {O}-----{1}-----{2}  |  \n","B2","B4","B6"),
+            string.Format("B |  {0}-----{1}-----{2}  |  \n","B2","B4","B6"),
             "  |  | '   |   / |  |  \n",
-            string.Format("C |  |  {O}--{1}--{2}  |  |  \n","C3","C4","C5"),
+            string.Format("C |  |  {0}--{1}--{2}  |  |  \n","C3","C4","C5"),
             "  |  |  |     |  |  |  \n",
             string.Format("D {0}--{1}--{2}     {3}--{4}--{5}  \n","D1","D2","D3", "D5", "D6", "D7"),
             "  |  |  |     |  |  |  \n",
@@ -73,6 +72,7 @@ namespace Morabaraba_2
         };
 
 
+
         public static void printGameBoard(List<string> var)
         {
             // prints list of strings for each row of the board
@@ -81,7 +81,7 @@ namespace Morabaraba_2
             // its just a matter of indexing and updating at that index 
             foreach (string r in var)
             {
-                Console.Write(r);
+                Console.WriteLine(r);
             }
 
 
@@ -94,7 +94,11 @@ namespace Morabaraba_2
             printInstructions();
             Console.WriteLine("Press Enter to begin the game:");
             Console.ReadLine();
-            //printGameBoard(rows);
+
+          
+
+            printGameBoard(rows);
+            Console.ReadLine();
            // runGame(player currentPlayer); // an object of type player needs to be created 
             // run game is where everything should happen
             // should take 
