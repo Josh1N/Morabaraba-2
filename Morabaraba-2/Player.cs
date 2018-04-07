@@ -12,8 +12,6 @@ namespace Morabaraba_2
         public string state { get; set; }
         public List<string> unplaced { get; set; }
 
-
-        
         
 
 
