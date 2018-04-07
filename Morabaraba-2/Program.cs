@@ -129,19 +129,19 @@ namespace Morabaraba_2
         public static List<string> rows = new List<string>() // need to figure out how to circumanvigate escape character 
         {
              "  1  2  3  4  5  6  7  \n",
-            string.Format("A {0}--------{1}--------{2}  \n", A1, A4, A7),
+            string.Format("A {0}-------{1}-------{2}  \n", A1, A4, A7),
             "  | '      |       |  \n",
-            string.Format("B |  {0}-----{1}-----{2}  |  \n",B2,B4,B6),
+            string.Format("B | {0}-----{1}-----{2} |  \n",B2,B4,B6),
             "  |  | '   |   / |  |  \n",
-            string.Format("C |  |  {0}--{1}--{2}  |  |  \n",C3,C4,C5),
+            string.Format("C |  |  {0}-{1}-{2}  |  |  \n",C3,C4,C5),
             "  |  |  |     |  |  |  \n",
-            string.Format("D {0}--{1}--{2}     {3}--{4}--{5}  \n",D1,D2,D3, D5, D6, D7),
+            string.Format("D {0}-{1}-{2}   {3}-{4}-{5}  \n",D1,D2,D3, D5, D6, D7),
             "  |  |  |     |  |  |  \n",
             string.Format("E |  |  {0}--{1}--{2}  |  |  \n",E3,E4,E5),
             "  |  | /   |   ' |  |  \n",
             string.Format("F |  {0}-----{1}-----{2}  |  \n",F2,F4,F6),
             "  | /      |      ' |  \n",
-            string.Format("G {0}--------{1}--------{2}  \n\n",G1,G4,G7)
+            string.Format("G {0}-------{1}-------{2}  \n\n",G1,G4,G7)
         };
 
 
@@ -165,9 +165,12 @@ namespace Morabaraba_2
 
                   switch (pos)
             {       case "A1" :
-                    Positions.Remove(pos);
-                    A1 = "B";
+                    Positions.Remove(pos);  
+                  // A1 = "B";          //not changing the A1 value in the string format rows place holder
+                   rows[1] = "B"; // needs to change the value of the inputted string to that of the player character.
+                                       // Need to have way to store the 
                     break;
+                    
             }
         }
 
