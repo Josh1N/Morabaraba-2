@@ -34,8 +34,9 @@ namespace Morabaraba_2
         public List<string> UnplacedCows  = new List<string>(); //NEED TO KNOW WHETHER TO MAKE TWO LISTS (ONE) FOR EACH PLAYER SO AS TO KNOW HOW TO KEEP TO TRACK OF WHO HAS WHICH COWS
         public List<string> onBoardCows = new List<string>();
 
-        Player black = new Player();
-        Player white = new Player();
+        public static Player black = new Player();
+        public static Player white = new Player();
+
 
         //board positions
         public static string A1 = "A1";
@@ -65,7 +66,7 @@ namespace Morabaraba_2
 
 
 
-        public bool ValidPos(string pos)
+        public static bool ValidPos(string pos)
         {
             if (Positions.Contains(pos))
             {
@@ -74,12 +75,10 @@ namespace Morabaraba_2
             return false;
         }
 
-        public void SwitchPlayer(Player x)
+        public static void SwitchPlayer(Player x)
         {
             //first check if position is valid then
 
-           // if (ValidPos()
-            //{
 
 
                 if (x == black)
@@ -88,26 +87,29 @@ namespace Morabaraba_2
                 }
                 else
                     x = black;
-            //}
-            //switch (x)
-            //{
-            //    case black:
-            //        white;
-            //        break;
-            //    case white:
-            //        x = black;
-            //        break;
-
-            //}
-
+           
 
 
         }
 
 
 
-        static void runGame()//player currentPlayer) // an object of type player needs to be created
+        static void runGame(Player currentPlayer) // an object of type player needs to be created
         {
+            printGameBoard(rows);
+            currentPlayer = black;
+            Console.WriteLine(string.Format("Player {0} enter a position to place cow.", currentPlayer));
+
+            string ans = Console.ReadLine().ToUpper();
+            Console.Clear();
+            if (ValidPos(ans))
+            {
+                Placing(ans);
+                SwitchPlayer(currentPlayer);
+            }
+
+            Console.WriteLine(Positions);
+            Console.ReadLine();
 
 
             /* so first we need to start out by asking Player1 (lets use 1 and 2 instead of B and W) for their
@@ -126,7 +128,7 @@ namespace Morabaraba_2
         }
 
 
-        public static List<string> rows = new List<string>() // need to figure out how to circumanvigate escape character 
+        public static List<string> rows = new List<string>() 
         {
              "  1  2  3  4  5  6  7  \n",
             string.Format("A {0}--------{1}--------{2}  \n", A1, A4, A7),
@@ -161,15 +163,20 @@ namespace Morabaraba_2
 
         public static void Placing(string pos)
         {
-            // pos = Console.ReadLine().ToUpper();
 
-                  switch (pos)
-            {       case "A1" :
-                    Positions.Remove(pos);
-                    A1 = "B";
-                    break;
+            if (pos == "A1")
+            {
+                A1 = "B";
+
             }
+            //      switch (pos)
+            //{       case "A1" :
+            //        Positions.Remove(pos);
+            //        A1 = "B";
+            //        break;
+            //}
         }
+
 
         static void Main(string[] args)
         {
@@ -179,19 +186,19 @@ namespace Morabaraba_2
 
           
 
-            printGameBoard(rows);
+            //printGameBoard(rows);
 
-            Console.WriteLine("Enter position to place cow.");
+            //Console.WriteLine("Enter position to place cow.");
            
-            string ans = Console.ReadLine();
-            Console.Clear();
-            Placing(ans);
-            Console.WriteLine(Positions);
-            printGameBoard(rows);
-            Console.ReadLine();
-           // runGame(player currentPlayer); // an object of type player needs to be created 
+            //string ans = Console.ReadLine().ToUpper();
+            //Console.Clear();
+            //Placing(ans);
+            //Console.WriteLine(Positions);
+            //printGameBoard(rows);
+            //Console.ReadLine();
+            runGame(black); // an object of type player needs to be created 
             // run game is where everything should happen
-            // should take 
+            
 
         }
     }
