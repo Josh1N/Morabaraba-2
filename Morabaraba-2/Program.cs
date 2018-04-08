@@ -79,7 +79,7 @@ namespace Morabaraba_2
             //Console.Clear();
             if (ValidPos(ans))
             {
-                Placing(ans,currentPlayer);
+                Placing(board,ans,currentPlayer);
                 printGameBoard(board);
                 SwitchPlayer(currentPlayer);                
             }
@@ -145,7 +145,7 @@ namespace Morabaraba_2
         };
 
 
-
+      
 
         public static void printGameBoard(List<string> var)
         {
@@ -160,7 +160,7 @@ namespace Morabaraba_2
 
         }
 
-        public static char Placing(string pos, Player currentPlayer)
+        public static char Placing(List<string> board,string pos, Player currentPlayer)
         {
            
             string rowA = board[1];
@@ -177,6 +177,30 @@ namespace Morabaraba_2
             char posC3 = rowC[8];
             char posC4 = rowC[12];
             char posC5 = rowC[16];
+
+            string rowD = board[6];
+            char posD1 = rowD[2];
+            char posD2 = rowD[5];
+            char posD3 = rowD[8];
+            char posD5 = rowD[16];
+            char posD6 = rowD[19];
+            char posD7 = rowD[22];
+
+            string rowE = board[7];
+            char posE3 = rowE[8];
+            char posE4 = rowE[12];
+            char posE5 = rowE[16];
+
+            string rowF = board[8];
+            char posF2 = rowF[5];
+            char posF4 = rowF[12];
+            char posF6 = rowF[19];
+
+            string rowG = board[9];
+            char posG1 = rowG[2];
+            char posG4 = rowG[12];
+            char posG7 = rowG[22];
+
 
             switch (pos)
             {
@@ -241,6 +265,118 @@ namespace Morabaraba_2
                     posC5 = 'B';
                     updateLine = rowC.Remove(16, 1);
                     Console.WriteLine(updateLine.Insert(16, posC5.ToString()));
+                    Positions.Remove(pos);
+                    break;
+
+                case "D1":
+                    posD1 = 'B';  //hard coded for now - need to add the current players symbol
+                    updateLine = rowD.Remove(2, 1);
+                    Console.WriteLine(updateLine.Insert(2, posD1.ToString()));
+                    Positions.Remove(pos);
+                    break;
+
+                case "D2":
+                    posD2 = 'B';  //hard coded for now - need to add the current players symbol
+                    updateLine = rowD.Remove(5, 1);
+                    Console.WriteLine(updateLine.Insert(5, posD2.ToString()));
+                    Positions.Remove(pos);
+                    break;
+
+                case "D3":
+                    posD3 = 'B';  //hard coded for now - need to add the current players symbol
+                    updateLine = rowD.Remove(8, 1);
+                    updateLine=updateLine.Insert(8, posD3.ToString());
+                   //WORKING ON THIS!!!!!
+                    board.Add(updateLine);
+                    printGameBoard(board);
+                    Console.WriteLine(board);
+                    Positions.Remove(pos);
+                    break;
+
+                case "D5":
+                    posD5 = 'B';  //hard coded for now - need to add the current players symbol
+                    updateLine = rowD.Remove(16, 1);
+                    Console.WriteLine(updateLine.Insert(16, posD5.ToString()));
+                    Positions.Remove(pos);
+                    break;
+
+                case "D6":
+                    posD6 = 'B';  //hard coded for now - need to add the current players symbol
+                    updateLine = rowD.Remove(19, 1);
+                    Console.WriteLine(updateLine.Insert(19, posD6.ToString()));
+                    Positions.Remove(pos);
+                    break;
+
+                case "D7":
+                    posD7 = 'B';  //hard coded for now - need to add the current players symbol
+                    updateLine = rowD.Remove(22, 1);
+                    Console.WriteLine(updateLine.Insert(22, posD7.ToString()));
+                    Positions.Remove(pos);
+                    break;
+
+                //E
+                case "E3":
+                    posE3 = 'B';
+                    updateLine = rowC.Remove(8, 1);
+                    Console.WriteLine(updateLine.Insert(8, posE3.ToString()));
+                    Positions.Remove(pos);
+                    break;
+
+                case "E4":
+                    posE4 = 'B';
+                    updateLine = rowC.Remove(12, 1);
+                    Console.WriteLine(updateLine.Insert(12, posE4.ToString()));
+                    Positions.Remove(pos);
+                    break;
+
+                case "E5":
+                    posE5 = 'B';
+                    updateLine = rowC.Remove(16, 1);
+                    Console.WriteLine(updateLine.Insert(16, posE5.ToString()));
+                    Positions.Remove(pos);
+                    break;
+
+                //F
+                case "F2":
+                    posF2 = 'B';
+                    updateLine = rowB.Remove(5, 1);
+                    Console.WriteLine(updateLine.Insert(5, posF2.ToString()));
+                    Positions.Remove(pos);
+                    break;
+
+                case "F4":
+                    posF4 = 'B';
+                    updateLine = rowB.Remove(12, 1);
+                    Console.WriteLine(updateLine.Insert(12, posF4.ToString()));
+                    Positions.Remove(pos);
+                    break;
+
+                case "F6":
+                    posF6 = 'B';
+                    updateLine = rowB.Remove(19, 1);
+                    Console.WriteLine(updateLine.Insert(19, posF6.ToString()));
+                    Positions.Remove(pos);
+                    break;
+
+                //G
+                case "G1":
+                    posG1 = 'B';  //hard coded for now - need to add the current players symbol
+                    updateLine = rowG.Remove(2, 1);
+                    Console.WriteLine(updateLine.Insert(2, posG1.ToString()));
+                    Positions.Remove(pos);
+                    break;
+
+                case "G4":
+                    posG4 = 'B';
+                    updateLine = rowA.Remove(12, 1);
+                    Console.WriteLine(updateLine.Insert(12, posG4.ToString()));
+                    Positions.Remove(pos);
+                    break;
+
+                case "G7":
+                    posG7 = 'B';
+                    updateLine = rowA.Remove(22, 1);
+                    Console.WriteLine(updateLine.Insert(22, posG7.ToString()));
                     Positions.Remove(pos);
                     break;
 
