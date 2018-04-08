@@ -38,33 +38,7 @@ namespace Morabaraba_2
         public static Player black = new Player();
         public static Player white = new Player();
 
-
-        //board positions
-        public static string A1 = "A1";
-        public static string A4 = "A4";
-        public static string A7 = "A7";
-        public static string B2 = "B2";
-        public static string B4 = "B4";
-        public static string B6 = "B6";
-        public static string C3 = "C3";
-        public static string C4 = "C4";
-        public static string C5 = "C5";
-        public static string D1 = "D1";
-        public static string D2 = "D2";
-        public static string D3 = "D3";
-        public static string D5 = "D5";
-        public static string D6 = "D6";
-        public static string D7 = "D7";
-        public static string E3 = "E3";
-        public static string E4 = "E4";
-        public static string E5 = "E5";
-        public static string F2 = "F2";
-        public static string F4 = "F4";
-        public static string F6 = "F6";
-        public static string G1 = "G1";
-        public static string G4 = "G4";
-        public static string G7 = "G7";
-
+        //public static enum State { Placing}
 
 
         public static bool ValidPos(string pos)
@@ -105,10 +79,13 @@ namespace Morabaraba_2
             //Console.Clear();
             if (ValidPos(ans))
             {
-                Placing(ans);
+                Placing(ans,currentPlayer);
                 printGameBoard(board);
-                SwitchPlayer(currentPlayer);
-                
+                SwitchPlayer(currentPlayer);                
+            }
+            else
+            {
+                Console.WriteLine("The position is not valid. Please enter a valid position to place a cow on the board.");
             }
 
             Console.WriteLine(Positions);
@@ -152,19 +129,19 @@ namespace Morabaraba_2
         public static List<string> board = new List<string>()
         {
             "  1  2  3   4   5  6  7  \n",
-            "A O ------- O ------- O  \n",  //A1 =[1][2]    A4=[1][12]  A7=[1][22]
+            "A O ------- O ------- O  \n",  //A1 =[1][2]    A4=[1][12]      A7=[1][22]
             "  | '       |       ' |  \n",
-            "B |  O ---- O ---- O  |  \n",  //B2 =[3][5]    B4=[3][12]  B6=[3][19]
+            "B |  O ---- O ---- O  |  \n",  //B2 =[3][5]    B4=[3][12]      B6=[3][19]
             "  |  | '    |   /  |  |  \n",
-            "C |  |  O - O - O  |  |  \n",
+            "C |  |  O - O - O  |  |  \n",  //C3 =[5][8]    C4 =[5][12]     C5=[5][16]
             "  |  |  |       |  |  |  \n",
-            "D O -O- O       O -O- O  \n",
+            "D O -O- O       O -O- O  \n",  //D1=[7][2]     D2=[7][5]       D3=[7][8]     D5=[7][16]     D6=[7][19]    D7=[7][22]
             "  |  |  |       |  |  |  \n",
-            "E |  |  O - O - O  |  |  \n",
+            "E |  |  O - O - O  |  |  \n",  //E3=[9][8]     E4=[9][12]      E5=[9][16]
             "  |  | /    |    ' |  |  \n",
-            "F |  O ---- O ---- O  |  \n",
+            "F |  O ---- O ---- O  |  \n",  //F2=[11][5]    F4=[11][12]     F6=[11][19]    
             "  | /       |       ' |  \n",
-            "G O ------- O ------- O  \n\n"
+            "G O ------- O ------- O  \n\n"  //G1=[13][2]   G4=[13][12]     G7=[13][22]
         };
 
 
@@ -183,36 +160,95 @@ namespace Morabaraba_2
 
         }
 
-        public static char Placing(string pos)
+        public static char Placing(string pos, Player currentPlayer)
         {
+           
             string rowA = board[1];
             char posA1 = rowA[2];
             char posA4 = rowA[12];
             char posA7 = rowA[22];
 
+            string rowB = board[3];
+            char posB2 = rowB[5];
+            char posB4 = rowB[12];
+            char posB6 = rowB[19];
+
+            string rowC = board[5];
+            char posC3 = rowC[8];
+            char posC4 = rowC[12];
+            char posC5 = rowC[16];
+
             switch (pos)
             {
+                //A
                 case "A1":
-                    posA1 = 'B';
+                    posA1 = 'B';  //hard coded for now - need to add the current players symbol
                     string updateLine= rowA.Remove(2, 1);
                     Console.WriteLine(updateLine.Insert(2,posA1.ToString()));
+                    Positions.Remove(pos);
                     break;
 
                 case "A4":
                     posA4 = 'B';
+                    updateLine = rowA.Remove(12, 1);
+                    Console.WriteLine(updateLine.Insert(12, posA4.ToString()));
+                    Positions.Remove(pos);
                     break;
 
                 case "A7":
                     posA7 = 'B';
+                    updateLine = rowA.Remove(22, 1);
+                    Console.WriteLine(updateLine.Insert(22, posA7.ToString()));
+                    Positions.Remove(pos);
+                    break;
+                //B
+                case "B2":
+                    posB2 = 'B';
+                    updateLine = rowB.Remove(5, 1);
+                    Console.WriteLine(updateLine.Insert(5, posB2.ToString()));
+                    Positions.Remove(pos);
                     break;
 
-                
+                case "B4":
+                    posB4 = 'B';
+                    updateLine = rowB.Remove(12, 1);
+                    Console.WriteLine(updateLine.Insert(12, posB4.ToString()));
+                    Positions.Remove(pos);
+                    break;
+
+                case "B6":
+                    posB4 = 'B';
+                    updateLine = rowB.Remove(19, 1);
+                    Console.WriteLine(updateLine.Insert(19, posB6.ToString()));
+                    Positions.Remove(pos);
+                    break;
+                //C
+                case "C3":
+                    posC3 = 'B';
+                    updateLine = rowC.Remove(8, 1);
+                    Console.WriteLine(updateLine.Insert(8, posC3.ToString()));
+                    Positions.Remove(pos);
+                    break;
+
+                case "C4":
+                    posC4 = 'B';
+                    updateLine = rowC.Remove(12, 1);
+                    Console.WriteLine(updateLine.Insert(12, posC4.ToString()));
+                    Positions.Remove(pos);
+                    break;
+
+                case "C5":
+                    posC5 = 'B';
+                    updateLine = rowC.Remove(16, 1);
+                    Console.WriteLine(updateLine.Insert(16, posC5.ToString()));
+                    Positions.Remove(pos);
+                    break;
+
+
 
             }
           
                     return 'a';
-
-
 
             //switch (pos)
             //{       case "A1" :
@@ -235,7 +271,8 @@ namespace Morabaraba_2
             Console.ReadLine();
 
 
-            ////**This has all been added to the runGame method
+            ////**This has all been added to the runGame method:
+
             //printGameBoard(board);
             //Console.WriteLine("Enter position to place cow.");
             //string ans = Console.ReadLine().ToUpper();
