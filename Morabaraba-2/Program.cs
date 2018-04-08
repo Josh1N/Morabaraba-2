@@ -29,10 +29,10 @@ namespace Morabaraba_2
    *         
    */
         //for the Positions list, when a player selects a position we can change that position to B or W to update the board and use the availablePositions list to add and remove positions that have been played
-        public static List<string> Positions = new List<string> { "A1", "A4", "A7", "B2","B4","B6", "C3","C4","C5","D1","D2","D3", "D5", "D6", "D7","E3","E4","E5","F2","F4","F6","G1","G4","G7" };
+        public static List<string> Positions = new List<string> { "A1", "A4", "A7", "B2", "B4", "B6", "C3", "C4", "C5", "D1", "D2", "D3", "D5", "D6", "D7", "E3", "E4", "E5", "F2", "F4", "F6", "G1", "G4", "G7" };
         public List<string> availablePositions = new List<string> { "A1", "A4", "A7", "B2", "B4", "B6", "C3", "C4", "C5", "D1", "D2", "D3", "D5", "D6", "D7", "E3", "E4", "E5", "F2", "F4", "F6", "G1", "G4", "G7" };
 
-        public List<string> UnplacedCows  = new List<string>(); //NEED TO KNOW WHETHER TO MAKE TWO LISTS (ONE) FOR EACH PLAYER SO AS TO KNOW HOW TO KEEP TO TRACK OF WHO HAS WHICH COWS
+        public List<string> UnplacedCows = new List<string>(); //NEED TO KNOW WHETHER TO MAKE TWO LISTS (ONE) FOR EACH PLAYER SO AS TO KNOW HOW TO KEEP TO TRACK OF WHO HAS WHICH COWS
         public List<string> onBoardCows = new List<string>();
 
         public static Player black = new Player();
@@ -56,20 +56,20 @@ namespace Morabaraba_2
 
 
 
-                if (x == black)
-                {
-                    x = white;
-                }
-                else
-                    x = black;
-           
+            if (x == black)
+            {
+                x = white;
+            }
+            else
+                x = black;
+
 
 
         }
 
 
 
-        static void runGame(Player currentPlayer) 
+        static void runGame(Player currentPlayer)
         {
             printGameBoard(board);
             currentPlayer = black;
@@ -79,9 +79,9 @@ namespace Morabaraba_2
             //Console.Clear();
             if (ValidPos(ans))
             {
-                Placing(board,ans,currentPlayer);
+                Placing(board, ans, currentPlayer);
                 printGameBoard(board);
-                SwitchPlayer(currentPlayer);                
+                SwitchPlayer(currentPlayer);
             }
             else
             {
@@ -126,6 +126,8 @@ namespace Morabaraba_2
         //    string.Format("G {0}-------{1}-------{2}  \n\n",G1,G4,G7)
         //};
 
+
+
         public static List<string> board = new List<string>()
         {
             "  1  2  3   4   5  6  7  \n",
@@ -145,7 +147,7 @@ namespace Morabaraba_2
         };
 
 
-      
+
 
         public static void printGameBoard(List<string> var)
         {
@@ -156,13 +158,13 @@ namespace Morabaraba_2
             foreach (string r in var)
             {
                 Console.WriteLine(r);
-            }        
+            }
 
         }
 
-        public static char Placing(List<string> board,string pos, Player currentPlayer)
+        public static char Placing(List<string> board, string pos, Player currentPlayer)
         {
-           
+
             string rowA = board[1];
             char posA1 = rowA[2];
             char posA4 = rowA[12];
@@ -207,24 +209,29 @@ namespace Morabaraba_2
                 //A
                 case "A1":
                     posA1 = 'B';  //hard coded for now - need to add the current players symbol
-                    string updateLine= rowA.Remove(2, 1);
-                    Console.WriteLine(updateLine.Insert(2,posA1.ToString()));
+                    string updateLine = board[1].Remove(2, 1);
+                    updateLine = updateLine.Insert(2, posA1.ToString());
+                    board[1] = updateLine;
                     Positions.Remove(pos);
                     break;
 
                 case "A4":
                     posA4 = 'B';
-                    updateLine = rowA.Remove(12, 1);
-                    Console.WriteLine(updateLine.Insert(12, posA4.ToString()));
+                    updateLine = board[1].Remove(12, 1);
+                    updateLine = updateLine.Insert(12, posA4.ToString());
+                    board[1] = updateLine;
                     Positions.Remove(pos);
                     break;
 
                 case "A7":
                     posA7 = 'B';
-                    updateLine = rowA.Remove(22, 1);
-                    Console.WriteLine(updateLine.Insert(22, posA7.ToString()));
+                    updateLine = board[1].Remove(22, 1);
+                    updateLine = updateLine.Insert(22, posA7.ToString());
+                    board[1] = updateLine;
                     Positions.Remove(pos);
                     break;
+
+                //fixes **********
                 //B
                 case "B2":
                     posB2 = 'B';
@@ -285,8 +292,9 @@ namespace Morabaraba_2
                 case "D3":
                     posD3 = 'B';  //hard coded for now - need to add the current players symbol
                     updateLine = rowD.Remove(8, 1);
-                    updateLine=updateLine.Insert(8, posD3.ToString());
-                   //WORKING ON THIS!!!!!
+                    updateLine = updateLine.Insert(8, posD3.ToString());
+
+                    //WORKING ON THIS!!!!!
                     board.Add(updateLine);
                     printGameBoard(board);
                     Console.WriteLine(board);
@@ -383,8 +391,8 @@ namespace Morabaraba_2
 
 
             }
-          
-                    return 'a';
+
+            return 'a';
 
             //switch (pos)
             //{       case "A1" :
@@ -426,3 +434,6 @@ namespace Morabaraba_2
         }
     }
 }
+
+
+
