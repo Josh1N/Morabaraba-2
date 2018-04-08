@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Morabaraba_2
 {
     class Program
@@ -96,16 +97,18 @@ namespace Morabaraba_2
 
         static void runGame(Player currentPlayer) 
         {
-            printGameBoard(rows);
+            printGameBoard(board);
             currentPlayer = black;
             Console.WriteLine(string.Format("Player {0} enter a position to place cow.", currentPlayer)); //this is not working - not printing the player "black" or "white"
 
             string ans = Console.ReadLine().ToUpper();
-            Console.Clear();
+            //Console.Clear();
             if (ValidPos(ans))
             {
                 Placing(ans);
+                printGameBoard(board);
                 SwitchPlayer(currentPlayer);
+                
             }
 
             Console.WriteLine(Positions);
@@ -128,23 +131,42 @@ namespace Morabaraba_2
         }
 
 
-        public static List<string> rows = new List<string>() 
+        //public static List<string> rows = new List<string>() 
+        //{
+        //     "  1  2  3  4  5  6  7  \n",
+        //    string.Format("A {0}-------{1}-------{2}  \n", A1, A4, A7),
+        //    "  | '      |       |  \n",
+        //    string.Format("B | {0}-----{1}-----{2} |  \n",B2,B4,B6),
+        //    "  |  | '   |   / |  |  \n",
+        //    string.Format("C |  |  {0}-{1}-{2}  |  |  \n",C3,C4,C5),
+        //    "  |  |  |     |  |  |  \n",
+        //    string.Format("D {0}-{1}-{2}   {3}-{4}-{5}  \n",D1,D2,D3, D5, D6, D7),
+        //    "  |  |  |     |  |  |  \n",
+        //    string.Format("E |  |  {0}--{1}--{2}  |  |  \n",E3,E4,E5),
+        //    "  |  | /   |   ' |  |  \n",
+        //    string.Format("F |  {0}-----{1}-----{2}  |  \n",F2,F4,F6),
+        //    "  | /      |      ' |  \n",
+        //    string.Format("G {0}-------{1}-------{2}  \n\n",G1,G4,G7)
+        //};
+
+        public static List<string> board = new List<string>()
         {
-             "  1  2  3  4  5  6  7  \n",
-            string.Format("A {0}-------{1}-------{2}  \n", A1, A4, A7),
-            "  | '      |       |  \n",
-            string.Format("B | {0}-----{1}-----{2} |  \n",B2,B4,B6),
-            "  |  | '   |   / |  |  \n",
-            string.Format("C |  |  {0}-{1}-{2}  |  |  \n",C3,C4,C5),
-            "  |  |  |     |  |  |  \n",
-            string.Format("D {0}-{1}-{2}   {3}-{4}-{5}  \n",D1,D2,D3, D5, D6, D7),
-            "  |  |  |     |  |  |  \n",
-            string.Format("E |  |  {0}--{1}--{2}  |  |  \n",E3,E4,E5),
-            "  |  | /   |   ' |  |  \n",
-            string.Format("F |  {0}-----{1}-----{2}  |  \n",F2,F4,F6),
-            "  | /      |      ' |  \n",
-            string.Format("G {0}-------{1}-------{2}  \n\n",G1,G4,G7)
+            "  1  2  3   4   5  6  7  \n",
+            "A O ------- O ------- O  \n",  //A1 =[1][2]    A4=[1][12]  A7=[1][22]
+            "  | '       |       ' |  \n",
+            "B |  O ---- O ---- O  |  \n",  //B2 =[3][5]    B4=[3][12]  B6=[3][19]
+            "  |  | '    |   /  |  |  \n",
+            "C |  |  O - O - O  |  |  \n",
+            "  |  |  |       |  |  |  \n",
+            "D O -O- O       O -O- O  \n",
+            "  |  |  |       |  |  |  \n",
+            "E |  |  O - O - O  |  |  \n",
+            "  |  | /    |    ' |  |  \n",
+            "F |  O ---- O ---- O  |  \n",
+            "  | /       |       ' |  \n",
+            "G O ------- O ------- O  \n\n"
         };
+
 
 
 
@@ -161,21 +183,48 @@ namespace Morabaraba_2
 
         }
 
-        public static void Placing(string pos)
+        public static char Placing(string pos)
         {
+            string rowA = board[1];
+            char posA1 = rowA[2];
+            char posA4 = rowA[12];
+            char posA7 = rowA[22];
+
+            switch (pos)
+            {
+                case "A1":
+                    posA1 = 'B';
+                    string updateLine= rowA.Remove(2, 1);
+                    Console.WriteLine(updateLine.Insert(2,posA1.ToString()));
+                    break;
+
+                case "A4":
+                    posA4 = 'B';
+                    break;
+
+                case "A7":
+                    posA7 = 'B';
+                    break;
+
+                
+
+            }
+          
+                    return 'a';
 
 
-        switch (pos)
-        {       case "A1" :
-                Positions.Remove(pos);  
-                // A1 = "B";          //not changing the A1 value in the string format rows place holder
-                rows[1] = "B"; // needs to change the value of the inputted string to that of the player character.
-                                    // Need to have way to store the 
-                break;
-                    
 
-        }
-           
+            //switch (pos)
+            //{       case "A1" :
+            //        Positions.Remove(pos);  
+            //        // A1 = "B";          //not changing the A1 value in the string format rows place holder
+            //        board[1] = "B"; // needs to change the value of the inputted string to that of the player character.
+            //                            // Need to have way to store the 
+            //        break;
+
+
+            //}
+
         }
 
 
@@ -185,20 +234,21 @@ namespace Morabaraba_2
             Console.WriteLine("Press Enter to begin the game:");
             Console.ReadLine();
 
-          
-            //** This has all been added to the runGame method
-            //printGameBoard(rows);
-            //Console.WriteLine("Enter position to place cow.");        
+
+            ////**This has all been added to the runGame method
+            //printGameBoard(board);
+            //Console.WriteLine("Enter position to place cow.");
             //string ans = Console.ReadLine().ToUpper();
-            //Console.Clear();
+            ////Console.Clear();
             //Placing(ans);
             //Console.WriteLine(Positions);
-            //printGameBoard(rows);
+            //printGameBoard(board);
             //Console.ReadLine();
 
-            runGame(black); // an object of type player needs to be created 
+            runGame(black);
+            //runGame(black);// an object of type player needs to be created 
             // run game is where everything should happen
-            
+
 
         }
     }
