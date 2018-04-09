@@ -30,7 +30,7 @@ namespace Morabaraba_2
    */
         //for the Positions list, when a player selects a position we can change that position to B or W to update the board and use the availablePositions list to add and remove positions that have been played
         public static List<string> Positions = new List<string> { "A1", "A4", "A7", "B2", "B4", "B6", "C3", "C4", "C5", "D1", "D2", "D3", "D5", "D6", "D7", "E3", "E4", "E5", "F2", "F4", "F6", "G1", "G4", "G7" };
-        public List<string> availablePositions = new List<string> { "A1", "A4", "A7", "B2", "B4", "B6", "C3", "C4", "C5", "D1", "D2", "D3", "D5", "D6", "D7", "E3", "E4", "E5", "F2", "F4", "F6", "G1", "G4", "G7" };
+        public static List<string> availablePositions = new List<string> { "A1", "A4", "A7", "B2", "B4", "B6", "C3", "C4", "C5", "D1", "D2", "D3", "D5", "D6", "D7", "E3", "E4", "E5", "F2", "F4", "F6", "G1", "G4", "G7" };
 
         public List<string> UnplacedCows = new List<string>(); //NEED TO KNOW WHETHER TO MAKE TWO LISTS (ONE) FOR EACH PLAYER SO AS TO KNOW HOW TO KEEP TO TRACK OF WHO HAS WHICH COWS
         public List<string> onBoardCows = new List<string>();
@@ -41,7 +41,7 @@ namespace Morabaraba_2
 
         public static bool ValidPos(string pos)
         {
-            if (Positions.Contains(pos))
+            if (availablePositions.Contains(pos))
             {
                 return true;
             }
@@ -49,7 +49,7 @@ namespace Morabaraba_2
         }
 
 
-        public static void SwitchPlayer(Player x)
+        public static Player SwitchPlayer(Player x)
         {
             //first check if position is valid then
 
@@ -57,34 +57,39 @@ namespace Morabaraba_2
 
             if (x == black)
             {
-                x = white;
+                return white;
             }
             else
-                x = black;
+                return black;
 
 
 
         }
 
-
-        static void runGame(Player currentPlayer)
+        static void ifElse(string ans, Player currentPlayer)
         {
-            printGameBoard(board);
-            currentPlayer = black;
-            Console.WriteLine(string.Format("Player {0} enter a position to place cow.", currentPlayer.ToString())); //this is not working - not printing the player "black" or "white"
-
-            string ans = Console.ReadLine().ToUpper();
-            //Console.Clear();
             if (ValidPos(ans))
             {
                 Placing(board, ans, currentPlayer);
                 printGameBoard(board);
-                SwitchPlayer(currentPlayer);
+                currentPlayer = SwitchPlayer(currentPlayer);
+                runGame(currentPlayer);
             }
             else
             {
                 Console.WriteLine("The position is not valid. Please enter a valid position to place a cow on the board.");
+                ans = Console.ReadLine().ToUpper();
+                ifElse(ans, currentPlayer); 
             }
+        }
+
+        static void runGame(Player currentPlayer)
+        {
+            Console.WriteLine(string.Format("Player {0} enter a position to place cow.", currentPlayer.name)); //this is not working - not printing the player "black" or "white"
+
+            string ans = Console.ReadLine().ToUpper();
+
+            ifElse(ans, currentPlayer); 
 
             Console.WriteLine(Positions);
             Console.ReadLine();
@@ -397,8 +402,9 @@ namespace Morabaraba_2
             black.onBoard = 0;
             white.onBoard = 0;
             black.state = "Placing";
-            white.state = "Placing"; 
+            white.state = "Placing";
 
+            printGameBoard(board);
             runGame(black);
             // an object of type player needs to be created 
             // run game is where everything should happen
