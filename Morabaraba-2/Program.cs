@@ -71,6 +71,7 @@ namespace Morabaraba_2
             if (ValidPos(ans))
             {
                 Placing(board, ans, currentPlayer);
+                availablePositions.Remove(ans); 
                 printGameBoard(board);
                 currentPlayer = SwitchPlayer(currentPlayer);
                 runGame(currentPlayer);
@@ -83,8 +84,26 @@ namespace Morabaraba_2
             }
         }
 
+        static void checkPlayerState(Player currentPlayer)
+        {
+            if(currentPlayer.unPlaced > 0)
+            {
+                currentPlayer.state = "Placing"; 
+            }
+            else if(currentPlayer.unPlaced == 0)
+            {
+                currentPlayer.state = "Moving"; 
+            }
+            else if(currentPlayer.onBoard < 4 && currentPlayer.unPlaced == 0)
+            {
+                currentPlayer.state = "Flying"; 
+            }
+        }
+
         static void runGame(Player currentPlayer)
         {
+
+
             Console.WriteLine(string.Format("Player {0} enter a position to place cow.", currentPlayer.name)); //this is not working - not printing the player "black" or "white"
 
             string ans = Console.ReadLine().ToUpper();
