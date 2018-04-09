@@ -75,7 +75,7 @@ namespace Morabaraba_2
         {
             printGameBoard(board);
             currentPlayer = black;
-            Console.WriteLine(string.Format("Player {0} enter a position to place cow.", currentPlayer)); //this is not working - not printing the player "black" or "white"
+            Console.WriteLine(string.Format("Player {0} enter a position to place cow.", currentPlayer.ToString())); //this is not working - not printing the player "black" or "white"
 
             string ans = Console.ReadLine().ToUpper();
             //Console.Clear();
@@ -136,15 +136,15 @@ namespace Morabaraba_2
             "A O ------- O ------- O  \n",  //A1 =[1][2]    A4=[1][12]      A7=[1][22]
             "  | '       |       ' |  \n",
             "B |  O ---- O ---- O  |  \n",  //B2 =[3][5]    B4=[3][12]      B6=[3][19]
-            "  |  | '    |   /  |  |  \n",
+            "  |  | '    |   '  |  |  \n",
             "C |  |  O - O - O  |  |  \n",  //C3 =[5][8]    C4 =[5][12]     C5=[5][16]
             "  |  |  |       |  |  |  \n",
             "D O -O- O       O -O- O  \n",  //D1=[7][2]     D2=[7][5]       D3=[7][8]     D5=[7][16]     D6=[7][19]    D7=[7][22]
             "  |  |  |       |  |  |  \n",
             "E |  |  O - O - O  |  |  \n",  //E3=[9][8]     E4=[9][12]      E5=[9][16]
-            "  |  | /    |    ' |  |  \n",
+            "  |  | '    |    ' |  |  \n",
             "F |  O ---- O ---- O  |  \n",  //F2=[11][5]    F4=[11][12]     F6=[11][19]    
-            "  | /       |       ' |  \n",
+            "  | '       |       ' |  \n",
             "G O ------- O ------- O  \n\n"  //G1=[13][2]   G4=[13][12]     G7=[13][22]
         };
 

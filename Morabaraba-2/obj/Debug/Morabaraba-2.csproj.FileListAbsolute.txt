@@ -40,3 +40,10 @@ C:\Users\Josh\Desktop\Morabaraba-2\Morabaraba-2\obj\Debug\Morabaraba-2.csprojRes
 C:\Users\Josh\Desktop\Morabaraba-2\Morabaraba-2\obj\Debug\Morabaraba-2.csproj.CoreCompileInputs.cache
 C:\Users\Josh\Desktop\Morabaraba-2\Morabaraba-2\obj\Debug\Morabaraba-2.exe
 C:\Users\Josh\Desktop\Morabaraba-2\Morabaraba-2\obj\Debug\Morabaraba-2.pdb
+\\ict.ru.ac.za\DFS\UGHomes\g16w2272\Desktop\Morabaraba 2\Morabaraba-2\Morabaraba-2\bin\Debug\Morabaraba-2.exe.config
+\\ict.ru.ac.za\DFS\UGHomes\g16w2272\Desktop\Morabaraba 2\Morabaraba-2\Morabaraba-2\bin\Debug\Morabaraba-2.exe
+\\ict.ru.ac.za\DFS\UGHomes\g16w2272\Desktop\Morabaraba 2\Morabaraba-2\Morabaraba-2\bin\Debug\Morabaraba-2.pdb
+\\ict.ru.ac.za\DFS\UGHomes\g16w2272\Desktop\Morabaraba 2\Morabaraba-2\Morabaraba-2\obj\Debug\Morabaraba-2.csprojResolveAssemblyReference.cache
+\\ict.ru.ac.za\DFS\UGHomes\g16w2272\Desktop\Morabaraba 2\Morabaraba-2\Morabaraba-2\obj\Debug\Morabaraba-2.csproj.CoreCompileInputs.cache
+\\ict.ru.ac.za\DFS\UGHomes\g16w2272\Desktop\Morabaraba 2\Morabaraba-2\Morabaraba-2\obj\Debug\Morabaraba-2.exe
+\\ict.ru.ac.za\DFS\UGHomes\g16w2272\Desktop\Morabaraba 2\Morabaraba-2\Morabaraba-2\obj\Debug\Morabaraba-2.pdb
