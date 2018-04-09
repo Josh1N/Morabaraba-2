@@ -36,12 +36,7 @@ namespace Morabaraba_2
         public List<string> onBoardCows = new List<string>();
 
         public static Player black = new Player();
-        black.name = "Black"; 
         public static Player white = new Player();
-
-        
-
-        //public static enum State { Placing}
 
 
         public static bool ValidPos(string pos)
@@ -52,6 +47,7 @@ namespace Morabaraba_2
             }
             return false;
         }
+
 
         public static void SwitchPlayer(Player x)
         {
@@ -69,7 +65,6 @@ namespace Morabaraba_2
 
 
         }
-
 
 
         static void runGame(Player currentPlayer)
@@ -103,32 +98,13 @@ namespace Morabaraba_2
              * 
              * the state of currentPlayer must be checked with every move
              */
-
         }
+
+
         static void printInstructions()
         {
             Console.Write("Morabaraba Game Instructions\n\nHOW TO START\n1. 	To start you need the Morabaraba game board. \n	The board starts empty, each player holding all his pieces (or 'cows') \n	in hand.\n2. 	Each player has 12 cows. One player plays white, \n	the other black.\n\nRULES\n1. 	The gameboard for Morabaraba.\n2. 	When a player is reduced to 3 pieces, his pieces are free \n	to move to any unoccupied point (or 'fly'), instead of being restricted \n	to adjacent points as earlier in the game.\n\nGAMEPLAY\n1. 	At first, each player in turn puts one piece on the board, \n	at any vacant point.\n2. 	Once all pieces are on the board, a player now moves one of \n	his pieces along a marked line to an adjacent empty point.\n3. 	If a piece placed or moved forms a row of three along a marked\n 	line (This is called a mill), he can take one of his opponent's \n	pieces (ie. kill an oponents 'cow'), as long as that piece is not itself part of a mill.\n4. 	If when capturing, all opposing pieces have formed mills, then\n 	any of the pieces may be captured.\n\nHOW TO WIN\n1. 	The goal of the game is to reduce your opponent's pieces to as\n 	little as possible.\n2. 	A player wins the game when his opponent is reduced to 2 pieces \n	and is thus unable to form a mill or make any further captures.\n3. 	If the board is filled in the first phase, and no pieces taken, \n	the second phase will be gridlocked with neither player able to move.\n 	In this case the game is draw.\n\n");
         }
-
-
-        //public static List<string> rows = new List<string>() 
-        //{
-        //     "  1  2  3  4  5  6  7  \n",
-        //    string.Format("A {0}-------{1}-------{2}  \n", A1, A4, A7),
-        //    "  | '      |       |  \n",
-        //    string.Format("B | {0}-----{1}-----{2} |  \n",B2,B4,B6),
-        //    "  |  | '   |   / |  |  \n",
-        //    string.Format("C |  |  {0}-{1}-{2}  |  |  \n",C3,C4,C5),
-        //    "  |  |  |     |  |  |  \n",
-        //    string.Format("D {0}-{1}-{2}   {3}-{4}-{5}  \n",D1,D2,D3, D5, D6, D7),
-        //    "  |  |  |     |  |  |  \n",
-        //    string.Format("E |  |  {0}--{1}--{2}  |  |  \n",E3,E4,E5),
-        //    "  |  | /   |   ' |  |  \n",
-        //    string.Format("F |  {0}-----{1}-----{2}  |  \n",F2,F4,F6),
-        //    "  | /      |      ' |  \n",
-        //    string.Format("G {0}-------{1}-------{2}  \n\n",G1,G4,G7)
-        //};
-
 
 
         public static List<string> board = new List<string>()
@@ -150,8 +126,6 @@ namespace Morabaraba_2
         };
 
 
-
-
         public static void printGameBoard(List<string> var)
         {
             // prints list of strings for each row of the board
@@ -165,7 +139,8 @@ namespace Morabaraba_2
 
         }
 
-        public static char Placing(List<string> board, string pos, Player currentPlayer)
+
+        public static void Placing(List<string> board, string pos, Player currentPlayer)
         {
 
             string rowA = board[1];
@@ -211,7 +186,7 @@ namespace Morabaraba_2
             {
                 //A
                 case "A1":
-                    posA1 = 'B';  //hard coded for now - need to add the current players symbol
+                    posA1 = currentPlayer.place;  
                     string updateLine = board[1].Remove(2, 1);
                     updateLine = updateLine.Insert(2, posA1.ToString());
                     board[1] = updateLine;
@@ -219,7 +194,7 @@ namespace Morabaraba_2
                     break;
 
                 case "A4":
-                    posA4 = 'B';
+                    posA4 = currentPlayer.place;
                     updateLine = board[1].Remove(12, 1);
                     updateLine = updateLine.Insert(12, posA4.ToString());
                     board[1] = updateLine;
@@ -227,17 +202,16 @@ namespace Morabaraba_2
                     break;
 
                 case "A7":
-                    posA7 = 'B';
+                    posA7 = currentPlayer.place;
                     updateLine = board[1].Remove(22, 1);
                     updateLine = updateLine.Insert(22, posA7.ToString());
                     board[1] = updateLine;
                     Positions.Remove(pos);
                     break;
 
-                //fixes **********
                 //B
                 case "B2":
-                    posB2 = 'B';
+                    posB2 = currentPlayer.place;
                     updateLine = board[3].Remove(5, 1);
                     updateLine = updateLine.Insert(5, posB2.ToString());
                     board[3] = updateLine;
@@ -245,7 +219,7 @@ namespace Morabaraba_2
                     break;
 
                 case "B4":
-                    posB4 = 'B';
+                    posB4 = currentPlayer.place;
                     updateLine = board[3].Remove(12, 1);
                     updateLine = updateLine.Insert(12, posB2.ToString());
                     board[3] = updateLine;
@@ -253,21 +227,21 @@ namespace Morabaraba_2
                     break;
 
                 case "B6":
-                    posB4 = 'B';
+                    posB4 = currentPlayer.place;
                     updateLine = board[3].Remove(19, 1);
                     updateLine = updateLine.Insert(19, posB2.ToString());
                     board[3] = updateLine;
                     Positions.Remove(pos);
                     break;
                 case "C3":
-                    posC3 = 'B';
+                    posC3 = currentPlayer.place;
                     updateLine = board[5].Remove(8, 1);
                     updateLine = updateLine.Insert(8, posC3.ToString());
                     board[5] = updateLine;
                     Positions.Remove(pos);
                     break;
                 case "C4":
-                    posC4 = 'B';
+                    posC4 = currentPlayer.place;
                     updateLine = board[5].Remove(12, 1);
                     updateLine = updateLine.Insert(12, posC4.ToString());
                     board[5] = updateLine;
@@ -275,7 +249,7 @@ namespace Morabaraba_2
                     break;
 
                 case "C5":
-                    posC5 = 'B';
+                    posC5 = currentPlayer.place;
                     updateLine = board[5].Remove(16, 1);
                     updateLine = updateLine.Insert(16, posC5.ToString());
                     board[5] = updateLine;
@@ -283,7 +257,7 @@ namespace Morabaraba_2
                     break;
 
                 case "D1":
-                    posD1 = 'B';  //hard coded for now - need to add the current players symbol
+                    posD1 = currentPlayer.place;
                     updateLine = board[7].Remove(2, 1);
                     updateLine = updateLine.Insert(2, posD1.ToString());
                     board[7] = updateLine;
@@ -292,7 +266,7 @@ namespace Morabaraba_2
 
 
                 case "D2":
-                    posD2 = 'B';  //hard coded for now - need to add the current players symbol
+                    posD2 = currentPlayer.place;
                     updateLine = board[7].Remove(5, 1);
                     updateLine = updateLine.Insert(5, posD2.ToString());
                     board[7] = updateLine;
@@ -300,7 +274,7 @@ namespace Morabaraba_2
                     break;
 
                 case "D3":
-                    posD3 = 'B';  //hard coded for now - need to add the current players symbol
+                    posD3 = currentPlayer.place;
                     updateLine = board[7].Remove(8, 1);
                     updateLine = updateLine.Insert(8, posD3.ToString());
                     board[7] = updateLine;
@@ -308,7 +282,7 @@ namespace Morabaraba_2
                     break;
 
                 case "D5":
-                    posD5 = 'B';  //hard coded for now - need to add the current players symbol
+                    posD5 = currentPlayer.place;
                     updateLine = board[7].Remove(16, 1);
                     updateLine = updateLine.Insert(16, posD5.ToString());
                     board[7] = updateLine;
@@ -316,14 +290,14 @@ namespace Morabaraba_2
                     break;
 
                 case "D6":
-                    posD6 = 'B';  //hard coded for now - need to add the current players symbol
+                    posD6 = currentPlayer.place;
                     updateLine = board[7].Remove(19, 1);
                     updateLine = updateLine.Insert(19, posD6.ToString());
                     board[7] = updateLine;
                     Positions.Remove(pos);
                     break;
                 case "D7":
-                    posD7 = 'B';  //hard coded for now - need to add the current players symbol
+                    posD7 = currentPlayer.place;
                     updateLine = board[7].Remove(22, 1);
                     updateLine = updateLine.Insert(22, posD7.ToString());
                     board[7] = updateLine;
@@ -332,7 +306,7 @@ namespace Morabaraba_2
 
                 //E
                 case "E3":
-                    posE3 = 'B';
+                    posE3 = currentPlayer.place;
                     updateLine = board[9].Remove(8, 1);
                     updateLine = updateLine.Insert(8, posE3.ToString());
                     board[9] = updateLine;
@@ -340,7 +314,7 @@ namespace Morabaraba_2
                     break;
 
                 case "E4":
-                    posE4 = 'B';
+                    posE4 = currentPlayer.place;
                     updateLine = board[9].Remove(12, 1);
                     updateLine = updateLine.Insert(12, posE4.ToString());
                     board[9] = updateLine;
@@ -348,7 +322,7 @@ namespace Morabaraba_2
                     break;
 
                 case "E5":
-                    posE5 = 'B';
+                    posE5 = currentPlayer.place;
                     updateLine = board[9].Remove(16, 1);
                     updateLine = updateLine.Insert(16, posE3.ToString());
                     board[9] = updateLine;
@@ -357,7 +331,7 @@ namespace Morabaraba_2
 
                 //F
                 case "F2":
-                    posF2 = 'B';
+                    posF2 = currentPlayer.place;
                     updateLine = board[11].Remove(5, 1);
                     updateLine = updateLine.Insert(5, posF2.ToString());
                     board[11] = updateLine;
@@ -366,7 +340,7 @@ namespace Morabaraba_2
 
 
                 case "F4":
-                    posF4 = 'B';
+                    posF4 = currentPlayer.place;
                     updateLine = board[11].Remove(12, 1);
                     updateLine = updateLine.Insert(12, posF4.ToString());
                     board[11] = updateLine;
@@ -374,7 +348,7 @@ namespace Morabaraba_2
                     break;
 
                 case "F6":
-                    posF6 = 'B';
+                    posF6 = currentPlayer.place;
                     updateLine = board[11].Remove(19, 1);
                     updateLine = updateLine.Insert(19, posF6.ToString());
                     board[11] = updateLine;
@@ -382,7 +356,7 @@ namespace Morabaraba_2
                     break;
                 //G
                 case "G1":
-                    posG1 = 'B';  //hard coded for now - need to add the current players symbol
+                    posG1 = currentPlayer.place;
                     updateLine = board[13].Remove(2, 1);
                     updateLine = updateLine.Insert(2, posG1.ToString());
                     board[13] = updateLine;
@@ -390,7 +364,7 @@ namespace Morabaraba_2
                     break;
 
                 case "G4":
-                    posG4 = 'B';
+                    posG4 = currentPlayer.place;
                     updateLine = board[13].Remove(12, 1);
                     updateLine = updateLine.Insert(12, posG4.ToString());
                     board[13] = updateLine;
@@ -398,30 +372,13 @@ namespace Morabaraba_2
                     break;
 
                 case "G7":
-                    posG7 = 'B';
+                    posG7 = currentPlayer.place;
                     updateLine = board[13].Remove(22, 1);
                     updateLine = updateLine.Insert(22, posG7.ToString());
                     board[13] = updateLine;
                     Positions.Remove(pos);
                     break;
-
-
-
             }
-
-            return 'a';
-
-            //switch (pos)
-            //{       case "A1" :
-            //        Positions.Remove(pos);  
-            //        // A1 = "B";          //not changing the A1 value in the string format rows place holder
-            //        board[1] = "B"; // needs to change the value of the inputted string to that of the player character.
-            //                            // Need to have way to store the 
-            //        break;
-
-
-            //}
-
         }
 
 
@@ -431,23 +388,20 @@ namespace Morabaraba_2
             Console.WriteLine("Press Enter to begin the game:");
             Console.ReadLine();
 
-
-            ////**This has all been added to the runGame method:
-
-            //printGameBoard(board);
-            //Console.WriteLine("Enter position to place cow.");
-            //string ans = Console.ReadLine().ToUpper();
-            ////Console.Clear();
-            //Placing(ans);
-            //Console.WriteLine(Positions);
-            //printGameBoard(board);
-            //Console.ReadLine();
+            black.name = "Black";
+            white.name = "White";
+            black.place = 'B';
+            white.place = 'W';
+            black.unPlaced = 12;
+            white.unPlaced = 12;
+            black.onBoard = 0;
+            white.onBoard = 0;
+            black.state = "Placing";
+            white.state = "Placing"; 
 
             runGame(black);
-            //runGame(black);// an object of type player needs to be created 
+            // an object of type player needs to be created 
             // run game is where everything should happen
-
-
         }
     }
 }

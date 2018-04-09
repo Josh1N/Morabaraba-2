@@ -8,12 +8,15 @@ namespace Morabaraba_2
 {
     public class Player
     {
-        public static List<string> playedPos { get; set; }
-        public static string state { get; set; }
-        public static List<string> unplaced { get; set; }
-        public static string  name { get; set; }
-        
+        public int onBoard { get; set; } 
 
+        public string state { get; set; }
+
+        public int unPlaced { get; set; }
+
+        public string name { get; set; }   
+
+        public char place { get; set; }
 
     }
 
