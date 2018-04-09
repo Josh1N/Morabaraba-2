@@ -36,6 +36,7 @@ namespace Morabaraba_2
         public List<string> onBoardCows = new List<string>();
 
         public static Player black = new Player();
+        black.name = "Black"; 
         public static Player white = new Player();
 
         
