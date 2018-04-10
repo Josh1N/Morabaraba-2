@@ -80,7 +80,8 @@ namespace Morabaraba_2
 
                 printGameBoard(board);
 
-                checkPlayerState(currentPlayer); 
+                checkPlayerState(currentPlayer);
+                checkMills(currentPlayer); 
 
                 currentPlayer = SwitchPlayer(currentPlayer);
                 runGame(currentPlayer);
@@ -138,6 +139,7 @@ namespace Morabaraba_2
 
             // go through player's positionsHeld list to see if they have any of the mills
             // if they do, remove mill from list and add to player's personal mill list 
+            bool gotMills = false; 
             foreach(string[] mill in availableMills)
             {
                 if (currentPlayer.positionsHeld.Contains(mill[0]))
@@ -146,6 +148,7 @@ namespace Morabaraba_2
                     {
                         if (currentPlayer.positionsHeld.Contains(mill[2]))
                         {
+                            gotMills = true; 
                             currentPlayer.playerMills.Add(mill);
                         }
                     }
@@ -157,8 +160,306 @@ namespace Morabaraba_2
             }
 
             // player must then be presented with option to kill
-
             // must design killing mechanism 
+            if (gotMills == true)
+            {
+                millKill(currentPlayer); 
+            }
+        }
+
+        public static void Killing(List<string> board, string pos, Player currentPlayer)
+        {
+
+            string rowA = board[1];
+            char posA1 = rowA[2];
+            char posA4 = rowA[12];
+            char posA7 = rowA[22];
+
+            string rowB = board[3];
+            char posB2 = rowB[5];
+            char posB4 = rowB[12];
+            char posB6 = rowB[19];
+
+            string rowC = board[5];
+            char posC3 = rowC[8];
+            char posC4 = rowC[12];
+            char posC5 = rowC[16];
+
+            string rowD = board[6];
+            char posD1 = rowD[2];
+            char posD2 = rowD[5];
+            char posD3 = rowD[8];
+            char posD5 = rowD[16];
+            char posD6 = rowD[19];
+            char posD7 = rowD[22];
+
+            string rowE = board[7];
+            char posE3 = rowE[8];
+            char posE4 = rowE[12];
+            char posE5 = rowE[16];
+
+            string rowF = board[8];
+            char posF2 = rowF[5];
+            char posF4 = rowF[12];
+            char posF6 = rowF[19];
+
+            string rowG = board[9];
+            char posG1 = rowG[2];
+            char posG4 = rowG[12];
+            char posG7 = rowG[22];
+
+
+            switch (pos)
+            {
+                //A
+                case "A1":
+                    posA1 = 'O'; 
+                    string updateLine = board[1].Remove(2, 1);
+                    updateLine = updateLine.Insert(2, posA1.ToString());
+                    board[1] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+
+                case "A4":
+                    posA4 = 'O';
+                    updateLine = board[1].Remove(12, 1);
+                    updateLine = updateLine.Insert(12, posA4.ToString());
+                    board[1] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+
+                case "A7":
+                    posA7 = 'O';
+                    updateLine = board[1].Remove(22, 1);
+                    updateLine = updateLine.Insert(22, posA7.ToString());
+                    board[1] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+
+                //B
+                case "B2":
+                    posB2 = 'O';
+                    updateLine = board[3].Remove(5, 1);
+                    updateLine = updateLine.Insert(5, posB2.ToString());
+                    board[3] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+
+                case "B4":
+                    posB4 = 'O';
+                    updateLine = board[3].Remove(12, 1);
+                    updateLine = updateLine.Insert(12, posB2.ToString());
+                    board[3] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+
+                case "B6":
+                    posB4 = 'O';
+                    updateLine = board[3].Remove(19, 1);
+                    updateLine = updateLine.Insert(19, posB2.ToString());
+                    board[3] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+                case "C3":
+                    posC3 = 'O';
+                    updateLine = board[5].Remove(8, 1);
+                    updateLine = updateLine.Insert(8, posC3.ToString());
+                    board[5] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+                case "C4":
+                    posC4 = 'O';
+                    updateLine = board[5].Remove(12, 1);
+                    updateLine = updateLine.Insert(12, posC4.ToString());
+                    board[5] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+
+                case "C5":
+                    posC5 = 'O';
+                    updateLine = board[5].Remove(16, 1);
+                    updateLine = updateLine.Insert(16, posC5.ToString());
+                    board[5] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+
+                case "D1":
+                    posD1 = 'O';
+                    updateLine = board[7].Remove(2, 1);
+                    updateLine = updateLine.Insert(2, posD1.ToString());
+                    board[7] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+
+
+                case "D2":
+                    posD2 = 'O';
+                    updateLine = board[7].Remove(5, 1);
+                    updateLine = updateLine.Insert(5, posD2.ToString());
+                    board[7] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+
+                case "D3":
+                    posD3 = 'O';
+                    updateLine = board[7].Remove(8, 1);
+                    updateLine = updateLine.Insert(8, posD3.ToString());
+                    board[7] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+
+                case "D5":
+                    posD5 = 'O';
+                    updateLine = board[7].Remove(16, 1);
+                    updateLine = updateLine.Insert(16, posD5.ToString());
+                    board[7] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+
+                case "D6":
+                    posD6 = 'O';
+                    updateLine = board[7].Remove(19, 1);
+                    updateLine = updateLine.Insert(19, posD6.ToString());
+                    board[7] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+                case "D7":
+                    posD7 = 'O';
+                    updateLine = board[7].Remove(22, 1);
+                    updateLine = updateLine.Insert(22, posD7.ToString());
+                    board[7] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+
+                //E
+                case "E3":
+                    posE3 = 'O';
+                    updateLine = board[9].Remove(8, 1);
+                    updateLine = updateLine.Insert(8, posE3.ToString());
+                    board[9] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+
+                case "E4":
+                    posE4 = 'O';
+                    updateLine = board[9].Remove(12, 1);
+                    updateLine = updateLine.Insert(12, posE4.ToString());
+                    board[9] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+
+                case "E5":
+                    posE5 = 'O';
+                    updateLine = board[9].Remove(16, 1);
+                    updateLine = updateLine.Insert(16, posE3.ToString());
+                    board[9] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+
+                //F
+                case "F2":
+                    posF2 = 'O';
+                    updateLine = board[11].Remove(5, 1);
+                    updateLine = updateLine.Insert(5, posF2.ToString());
+                    board[11] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+
+
+                case "F4":
+                    posF4 = 'O';
+                    updateLine = board[11].Remove(12, 1);
+                    updateLine = updateLine.Insert(12, posF4.ToString());
+                    board[11] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+
+                case "F6":
+                    posF6 = 'O';
+                    updateLine = board[11].Remove(19, 1);
+                    updateLine = updateLine.Insert(19, posF6.ToString());
+                    board[11] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+                //G
+                case "G1":
+                    posG1 = 'O';
+                    updateLine = board[13].Remove(2, 1);
+                    updateLine = updateLine.Insert(2, posG1.ToString());
+                    board[13] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+
+                case "G4":
+                    posG4 = 'O';
+                    updateLine = board[13].Remove(12, 1);
+                    updateLine = updateLine.Insert(12, posG4.ToString());
+                    board[13] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+
+                case "G7":
+                    posG7 = 'O';
+                    updateLine = board[13].Remove(22, 1);
+                    updateLine = updateLine.Insert(22, posG7.ToString());
+                    board[13] = updateLine;
+                    Positions.Remove(pos);
+                    break;
+            }
+        }
+
+        static void millKill(Player currentPlayer)
+        {
+            Console.WriteLine("You've made a mill! choose one of the other player's cows to kill:");
+            string ans = Console.ReadLine().ToUpper();
+            if (currentPlayer == black)
+            {
+                if (white.positionsHeld.Contains(ans))
+                {
+                    Killing(board, ans, currentPlayer);
+
+                    availablePositions.Add(ans);
+                    white.positionsHeld.Remove(ans);
+                    white.onBoard = white.onBoard - 1;
+
+                    printGameBoard(board);
+
+                    checkPlayerState(currentPlayer);
+
+                    currentPlayer = SwitchPlayer(currentPlayer);
+                    runGame(currentPlayer);
+                }
+                else
+                {
+                    Console.WriteLine("The position is not valid. Please enter a valid position to place a cow on the board.");
+                    ans = Console.ReadLine().ToUpper();
+                    millKill(currentPlayer);
+                }
+            }
+            else
+            {
+                if (black.positionsHeld.Contains(ans))
+                {
+                    Killing(board, ans, currentPlayer);
+
+                    availablePositions.Add(ans);
+                    black.positionsHeld.Remove(ans);
+                    black.onBoard = white.onBoard - 1;
+
+                    printGameBoard(board);
+
+                    checkPlayerState(currentPlayer);
+
+                    currentPlayer = SwitchPlayer(currentPlayer);
+                    runGame(currentPlayer);
+                }
+                else
+                {
+                    Console.WriteLine("The position is not valid. Please enter a valid position to place a cow on the board.");
+                    ans = Console.ReadLine().ToUpper();
+                    millKill(currentPlayer);
+                }
+            }
 
             // after player has killed with a mill, that mill should be added to another list which indicates that it may not be used again immediately 
 
@@ -173,7 +474,7 @@ namespace Morabaraba_2
             checkMills(currentPlayer); 
 
             Console.WriteLine(string.Format("Unplaced Cows: {0} Cows on Board: {1}", currentPlayer.unPlaced.ToString(), currentPlayer.onBoard.ToString()));
-            Console.WriteLine(string.Format("Mills: {0}", currentPlayer.playerMills.Count.ToString()));
+            //Console.WriteLine(string.Format("Mills: {0}", currentPlayer.playerMills.Count.ToString()));
             Console.WriteLine(string.Format("Player {0} enter a position to place cow.", currentPlayer.name)); //this is not working - not printing the player "black" or "white"
 
             string ans = Console.ReadLine().ToUpper();
