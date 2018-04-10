@@ -72,8 +72,11 @@ namespace Morabaraba_2
                 availablePositions.Remove(ans);
                 currentPlayer.positionsHeld.Add(ans); 
 
-                currentPlayer.unPlaced = currentPlayer.unPlaced - 1;
-                currentPlayer.onBoard = currentPlayer.onBoard + 1; 
+                if(currentPlayer.state == "Placing")
+                {
+                    currentPlayer.unPlaced = currentPlayer.unPlaced - 1;
+                    currentPlayer.onBoard = currentPlayer.onBoard + 1;
+                }
 
                 printGameBoard(board);
 
@@ -153,16 +156,10 @@ namespace Morabaraba_2
             // puts new mills into a players list and removes them from availableMills
             foreach(string[] mill in availableMills)
             {
-                if (currentPlayer.positionsHeld.Contains(mill[0]))
+                if (currentPlayer.positionsHeld.Contains(mill[0]) && currentPlayer.positionsHeld.Contains(mill[1]) && currentPlayer.positionsHeld.Contains(mill[2]))
                 {
-                    if (currentPlayer.positionsHeld.Contains(mill[1]))
-                    {
-                        if (currentPlayer.positionsHeld.Contains(mill[2]))
-                        {
-                            gotMills = true; 
-                            currentPlayer.playerMills.Add(mill);
-                        }
-                    }
+                    gotMills = true;
+                    currentPlayer.playerMills.Add(mill);
                 }
             }
             foreach(string[] mill in currentPlayer.playerMills)
@@ -176,20 +173,14 @@ namespace Morabaraba_2
             // and therefor not available, until broken and reformed. 
             foreach (string[] mill in currentPlayer.playerMills)
             {
-                if (currentPlayer.positionsHeld.Contains(mill[0]))
+                if(mill != null)
                 {
-                    if (currentPlayer.positionsHeld.Contains(mill[1]))
+                    if (!(currentPlayer.positionsHeld.Contains(mill[0]) && currentPlayer.positionsHeld.Contains(mill[1]) && currentPlayer.positionsHeld.Contains(mill[2])))
                     {
-                        if (currentPlayer.positionsHeld.Contains(mill[2]))
-                        {
-                            //
-                        }
-                        else
-                        {
-                            availableMills.Add(mill);
-                        }
+                        availableMills.Add(mill);
                     }
                 }
+
             }
             foreach (string[] mill in availableMills)
             {
@@ -445,6 +436,20 @@ namespace Morabaraba_2
             }
         }
 
+        static string[] check(string ans, Player player)
+        {
+            foreach (string[] mill in player.playerMills)
+            {
+                List<string> check = new List<string>();
+                check = mill.ToList();
+                if (check.Contains(ans))
+                {
+                    return mill;
+                }
+            }
+            return null; 
+        }
+
         static void millKill(Player currentPlayer)
         {
             // after player has killed with a mill, that mill should be added to another list which indicates that it may not be used again immediately 
@@ -459,6 +464,8 @@ namespace Morabaraba_2
             {
                 if (white.positionsHeld.Contains(ans))
                 {
+                    white.playerMills.Add(check(ans, white));
+
                     Killing(board, ans, currentPlayer);
 
                     availablePositions.Add(ans);
@@ -483,6 +490,8 @@ namespace Morabaraba_2
             {
                 if (black.positionsHeld.Contains(ans))
                 {
+                    black.playerMills.Add(check(ans, black));
+         
                     Killing(board, ans, currentPlayer);
 
                     availablePositions.Add(ans);
@@ -565,6 +574,7 @@ namespace Morabaraba_2
 
                 if (currentPlayer.positionsHeld.Contains(ans)) // does not check adjacency yet
                 {
+                    Killing(board, ans, currentPlayer); 
                     Console.WriteLine(string.Format("Player {0} enter the position you would like to move your cow to.", currentPlayer.name));
                     string ans1 = Console.ReadLine().ToUpper();
                     // this is where the adjacency test needs to happen
@@ -737,15 +747,15 @@ namespace Morabaraba_2
                 case "B4":
                     posB4 = currentPlayer.place;
                     updateLine = board[3].Remove(12, 1);
-                    updateLine = updateLine.Insert(12, posB2.ToString());
+                    updateLine = updateLine.Insert(12, posB4.ToString());
                     board[3] = updateLine;
                     Positions.Remove(pos);
                     break;
 
                 case "B6":
-                    posB4 = currentPlayer.place;
+                    posB6 = currentPlayer.place;
                     updateLine = board[3].Remove(19, 1);
-                    updateLine = updateLine.Insert(19, posB2.ToString());
+                    updateLine = updateLine.Insert(19, posB6.ToString());
                     board[3] = updateLine;
                     Positions.Remove(pos);
                     break;
@@ -840,7 +850,7 @@ namespace Morabaraba_2
                 case "E5":
                     posE5 = currentPlayer.place;
                     updateLine = board[9].Remove(16, 1);
-                    updateLine = updateLine.Insert(16, posE3.ToString());
+                    updateLine = updateLine.Insert(16, posE5.ToString());
                     board[9] = updateLine;
                     Positions.Remove(pos);
                     break;
