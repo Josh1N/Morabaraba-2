@@ -32,9 +32,6 @@ namespace Morabaraba_2
         public static List<string> Positions = new List<string> { "A1", "A4", "A7", "B2", "B4", "B6", "C3", "C4", "C5", "D1", "D2", "D3", "D5", "D6", "D7", "E3", "E4", "E5", "F2", "F4", "F6", "G1", "G4", "G7" };
         public static List<string> availablePositions = new List<string> { "A1", "A4", "A7", "B2", "B4", "B6", "C3", "C4", "C5", "D1", "D2", "D3", "D5", "D6", "D7", "E3", "E4", "E5", "F2", "F4", "F6", "G1", "G4", "G7" };
 
-        public List<string> UnplacedCows = new List<string>(); //NEED TO KNOW WHETHER TO MAKE TWO LISTS (ONE) FOR EACH PLAYER SO AS TO KNOW HOW TO KEEP TO TRACK OF WHO HAS WHICH COWS
-        public List<string> onBoardCows = new List<string>();
-
         public static Player black = new Player();
         public static Player white = new Player();
 
@@ -110,36 +107,38 @@ namespace Morabaraba_2
             }
         }
 
+        // have a named array for each possible mill
+        static string[] m0 = new string[] { "A1", "A4", "A7" };
+        static string[] m1 = new string[] { "B2", "B4", "B6" };
+        static string[] m2 = new string[] { "C3", "C4", "C5" };
+        static string[] m3 = new string[] { "D1", "D2", "D3" };
+        static string[] m4 = new string[] { "D5", "D6", "D7" };
+        static string[] m5 = new string[] { "E3", "E4", "E5" };
+        static string[] m6 = new string[] { "F2", "F4", "F6" };
+        static string[] m7 = new string[] { "G1", "G4", "G7" };
+        static string[] m8 = new string[] { "A1", "D1", "G1" };
+        static string[] m9 = new string[] { "B2", "D2", "F2" };
+        static string[] m10 = new string[] { "C3", "D3", "E3" };
+        static string[] m11 = new string[] { "A4", "B4", "C4" };
+        static string[] m12 = new string[] { "E4", "F4", "G4" };
+        static string[] m13 = new string[] { "C5", "D5", "E5" };
+        static string[] m14 = new string[] { "B6", "D6", "F6" };
+        static string[] m15 = new string[] { "A7", "D7", "G7" };
+        static string[] m16 = new string[] { "A1", "B2", "C3" };
+        static string[] m17 = new string[] { "A7", "B6", "C5" };
+        static string[] m18 = new string[] { "G1", "F2", "E3" };
+        static string[] m19 = new string[] { "G7", "F6", "E5" };
+
+        // put mill arrays into a list
+        static List<string[]> availableMills = new List<string[]> { m0, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16, m17, m18, m19 };
+
         static void checkMills(Player currentPlayer)
         {
-            // have a named array for each possible mill
-            string[] m0 = new string[] { "A1", "A4", "A7" };
-            string[] m1 = new string[] { "B2", "B4", "B6" };
-            string[] m2 = new string[] { "C3", "C4", "C5" };
-            string[] m3 = new string[] { "D1", "D2", "D3" };
-            string[] m4 = new string[] { "D5", "D6", "D7" };
-            string[] m5 = new string[] { "E3", "E4", "E5" };
-            string[] m6 = new string[] { "F2", "F4", "F6" };
-            string[] m7 = new string[] { "G1", "G4", "G7" };
-            string[] m8 = new string[] { "A1", "D1", "G1" };
-            string[] m9 = new string[] { "B2", "D2", "F2" };
-            string[] m10 = new string[] { "C3", "D3", "E3" };
-            string[] m11 = new string[] { "A4", "B4", "C4" };
-            string[] m12 = new string[] { "E4", "F4", "G4" };
-            string[] m13 = new string[] { "C5", "D5", "E5" };
-            string[] m14 = new string[] { "B6", "D6", "F6" };
-            string[] m15 = new string[] { "A7", "D7", "G7" };
-            string[] m16 = new string[] { "A1", "B2", "C3" };
-            string[] m17 = new string[] { "A7", "B6", "C5" };
-            string[] m18 = new string[] { "G1", "F2", "E3" };
-            string[] m19 = new string[] { "G7", "F6", "E5" };
-
-            // put mill arrays into a list
-            List<string[]> availableMills = new List<string[]> { m0, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16, m17, m18, m19 };
-
             // go through player's positionsHeld list to see if they have any of the mills
             // if they do, remove mill from list and add to player's personal mill list 
             bool gotMills = false; 
+
+            // puts new mills into a players list and removes them from availableMills
             foreach(string[] mill in availableMills)
             {
                 if (currentPlayer.positionsHeld.Contains(mill[0]))
@@ -157,6 +156,32 @@ namespace Morabaraba_2
             foreach(string[] mill in currentPlayer.playerMills)
             {
                 availableMills.Remove(mill); 
+            }
+
+            // removes broken mills from players list and puts them back in availableMills
+
+            // this mechanism prevents mills from being used twice beacause the mill, once made and used, will remain on the player's list,
+            // and therefor not available, until broken and reformed. 
+            foreach (string[] mill in currentPlayer.playerMills)
+            {
+                if (currentPlayer.positionsHeld.Contains(mill[0]))
+                {
+                    if (currentPlayer.positionsHeld.Contains(mill[1]))
+                    {
+                        if (currentPlayer.positionsHeld.Contains(mill[2]))
+                        {
+                            //
+                        }
+                        else
+                        {
+                            availableMills.Add(mill);
+                        }
+                    }
+                }
+            }
+            foreach (string[] mill in availableMills)
+            {
+                currentPlayer.playerMills.Remove(mill);
             }
 
             // player must then be presented with option to kill
@@ -410,6 +435,12 @@ namespace Morabaraba_2
 
         static void millKill(Player currentPlayer)
         {
+            // after player has killed with a mill, that mill should be added to another list which indicates that it may not be used again immediately 
+
+            // must design that mechanism 
+
+            // must also when checking for mills remember to remove broken mills from a player's list and put them back on the available mills list
+
             Console.WriteLine("You've made a mill! choose one of the other player's cows to kill:");
             string ans = Console.ReadLine().ToUpper();
             if (currentPlayer == black)
@@ -460,12 +491,6 @@ namespace Morabaraba_2
                     millKill(currentPlayer);
                 }
             }
-
-            // after player has killed with a mill, that mill should be added to another list which indicates that it may not be used again immediately 
-
-            // must design that mechanism 
-
-            // must also when checking for mills remember to remove broken mills from a player's list and put them back on the available mills list
         }
 
         static void runGame(Player currentPlayer)
@@ -473,17 +498,66 @@ namespace Morabaraba_2
             checkPlayerState(currentPlayer);
             checkMills(currentPlayer); 
 
-            Console.WriteLine(string.Format("Unplaced Cows: {0} Cows on Board: {1}", currentPlayer.unPlaced.ToString(), currentPlayer.onBoard.ToString()));
-            //Console.WriteLine(string.Format("Mills: {0}", currentPlayer.playerMills.Count.ToString()));
-            Console.WriteLine(string.Format("Player {0} enter a position to place cow.", currentPlayer.name)); //this is not working - not printing the player "black" or "white"
+            if(currentPlayer.state == "Placing")
+            {
+                Console.WriteLine(string.Format("Unplaced Cows: {0} Cows on Board: {1}", currentPlayer.unPlaced.ToString(), currentPlayer.onBoard.ToString()));
+                Console.WriteLine(string.Format("State: {0}", currentPlayer.state)); 
+                Console.WriteLine(string.Format("Player {0} enter a position to place cow.", currentPlayer.name));
 
-            string ans = Console.ReadLine().ToUpper();
+                string ans = Console.ReadLine().ToUpper();
 
-            ifElse(ans, currentPlayer); 
+                ifElse(ans, currentPlayer);
 
-            Console.WriteLine(Positions);
-            Console.ReadLine();
+                Console.WriteLine(Positions);
+                Console.ReadLine();
+            }
+            else if(currentPlayer.state == "Moving")
+            {
+                /* onve the state changes from Placing to Moving, the input message needs to change to 'move __ to __'
+                 * so it will require three input validations:
+                 * -> is the first input a position currently help by the current player?
+                 * -> is the second position available?
+                 * -> and is it adjacent to the first position?
+                 */
+                Console.WriteLine(string.Format("Unplaced Cows: {0} Cows on Board: {1}", currentPlayer.unPlaced.ToString(), currentPlayer.onBoard.ToString()));
+                Console.WriteLine(string.Format("State: {0}", currentPlayer.state));
+                Console.WriteLine(string.Format("Player {0} enter the position of the cow you would like to move.", currentPlayer.name));
 
+                string ans = Console.ReadLine().ToUpper();
+
+                if (currentPlayer.positionsHeld.Contains(ans)) // does not check adjacency yet
+                {
+                    Console.WriteLine(string.Format("Player {0} enter the position you would like to move your cow to.", currentPlayer.name));
+                    string ans1 = Console.ReadLine().ToUpper();
+                    ifElse(ans1, currentPlayer); 
+                }
+                else
+                {
+                    Console.WriteLine("The position is not valid. Please enter a valid position to place a cow on the board.");
+                    runGame(currentPlayer); 
+                }
+            }
+            else if(currentPlayer.state == "Flying")
+            {
+                // when the state changes from Moving to Flying, the third validation can just be ignored. 
+                Console.WriteLine(string.Format("Unplaced Cows: {0} Cows on Board: {1}", currentPlayer.unPlaced.ToString(), currentPlayer.onBoard.ToString()));
+                Console.WriteLine(string.Format("State: {0}", currentPlayer.state));
+                Console.WriteLine(string.Format("Player {0} enter the position of the cow you would like to move.", currentPlayer.name));
+
+                string ans = Console.ReadLine().ToUpper();
+
+                if (currentPlayer.positionsHeld.Contains(ans)) 
+                {
+                    Console.WriteLine(string.Format("Player {0} enter the position you would like to move your cow to.", currentPlayer.name));
+                    string ans1 = Console.ReadLine().ToUpper();
+                    ifElse(ans1, currentPlayer);
+                }
+                else
+                {
+                    Console.WriteLine("The position is not valid. Please enter a valid position to place a cow on the board.");
+                    runGame(currentPlayer);
+                }
+            }
 
             /* so first we need to start out by asking Player1 (lets use 1 and 2 instead of B and W) for their
              * first move -> so we're going to need some input validation here. 
