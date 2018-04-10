@@ -71,8 +71,17 @@ namespace Morabaraba_2
             if (ValidPos(ans))
             {
                 Placing(board, ans, currentPlayer);
-                availablePositions.Remove(ans); 
+
+                availablePositions.Remove(ans);
+                currentPlayer.positionsHeld.Add(ans); 
+
+                currentPlayer.unPlaced = currentPlayer.unPlaced - 1;
+                currentPlayer.onBoard = currentPlayer.onBoard + 1; 
+
                 printGameBoard(board);
+
+                checkPlayerState(currentPlayer); 
+
                 currentPlayer = SwitchPlayer(currentPlayer);
                 runGame(currentPlayer);
             }
@@ -100,10 +109,71 @@ namespace Morabaraba_2
             }
         }
 
+        static void checkMills(Player currentPlayer)
+        {
+            // have a named array for each possible mill
+            string[] m0 = new string[] { "A1", "A4", "A7" };
+            string[] m1 = new string[] { "B2", "B4", "B6" };
+            string[] m2 = new string[] { "C3", "C4", "C5" };
+            string[] m3 = new string[] { "D1", "D2", "D3" };
+            string[] m4 = new string[] { "D5", "D6", "D7" };
+            string[] m5 = new string[] { "E3", "E4", "E5" };
+            string[] m6 = new string[] { "F2", "F4", "F6" };
+            string[] m7 = new string[] { "G1", "G4", "G7" };
+            string[] m8 = new string[] { "A1", "D1", "G1" };
+            string[] m9 = new string[] { "B2", "D2", "F2" };
+            string[] m10 = new string[] { "C3", "D3", "E3" };
+            string[] m11 = new string[] { "A4", "B4", "C4" };
+            string[] m12 = new string[] { "E4", "F4", "G4" };
+            string[] m13 = new string[] { "C5", "D5", "E5" };
+            string[] m14 = new string[] { "B6", "D6", "F6" };
+            string[] m15 = new string[] { "A7", "D7", "G7" };
+            string[] m16 = new string[] { "A1", "B2", "C3" };
+            string[] m17 = new string[] { "A7", "B6", "C5" };
+            string[] m18 = new string[] { "G1", "F2", "E3" };
+            string[] m19 = new string[] { "G7", "F6", "E5" };
+
+            // put mill arrays into a list
+            List<string[]> availableMills = new List<string[]> { m0, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16, m17, m18, m19 };
+
+            // go through player's positionsHeld list to see if they have any of the mills
+            // if they do, remove mill from list and add to player's personal mill list 
+            foreach(string[] mill in availableMills)
+            {
+                if (currentPlayer.positionsHeld.Contains(mill[0]))
+                {
+                    if (currentPlayer.positionsHeld.Contains(mill[1]))
+                    {
+                        if (currentPlayer.positionsHeld.Contains(mill[2]))
+                        {
+                            currentPlayer.playerMills.Add(mill);
+                        }
+                    }
+                }
+            }
+            foreach(string[] mill in currentPlayer.playerMills)
+            {
+                availableMills.Remove(mill); 
+            }
+
+            // player must then be presented with option to kill
+
+            // must design killing mechanism 
+
+            // after player has killed with a mill, that mill should be added to another list which indicates that it may not be used again immediately 
+
+            // must design that mechanism 
+
+            // must also when checking for mills remember to remove broken mills from a player's list and put them back on the available mills list
+        }
+
         static void runGame(Player currentPlayer)
         {
+            checkPlayerState(currentPlayer);
+            checkMills(currentPlayer); 
 
-
+            Console.WriteLine(string.Format("Unplaced Cows: {0} Cows on Board: {1}", currentPlayer.unPlaced.ToString(), currentPlayer.onBoard.ToString()));
+            Console.WriteLine(string.Format("Mills: {0}", currentPlayer.playerMills.Count.ToString()));
             Console.WriteLine(string.Format("Player {0} enter a position to place cow.", currentPlayer.name)); //this is not working - not printing the player "black" or "white"
 
             string ans = Console.ReadLine().ToUpper();
@@ -414,14 +484,24 @@ namespace Morabaraba_2
 
             black.name = "Black";
             white.name = "White";
+
             black.place = 'B';
             white.place = 'W';
+
             black.unPlaced = 12;
             white.unPlaced = 12;
+
             black.onBoard = 0;
             white.onBoard = 0;
+
             black.state = "Placing";
             white.state = "Placing";
+
+            black.playerMills = new List<string[]>();
+            white.playerMills = new List<string[]>();
+
+            black.positionsHeld = new List<string>();
+            white.positionsHeld = new List<string>(); 
 
             printGameBoard(board);
             runGame(black);

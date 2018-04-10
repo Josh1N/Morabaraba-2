@@ -10,6 +10,8 @@ namespace Morabaraba_2
     {
         public int onBoard { get; set; } 
 
+        public List<string> positionsHeld { get; set; }
+
         public string state { get; set; }
 
         public int unPlaced { get; set; }
@@ -18,6 +20,7 @@ namespace Morabaraba_2
 
         public char place { get; set; }
 
+        public List<string[]> playerMills { get; set; }
     }
 
    
