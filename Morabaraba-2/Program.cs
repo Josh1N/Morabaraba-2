@@ -105,6 +105,18 @@ namespace Morabaraba_2
             {
                 currentPlayer.state = "Flying"; 
             }
+            else if(black.state == "Flying" && black.onBoard < 3)
+            {
+                // game over - White wins 
+                Console.Clear();
+                Console.WriteLine("White Player wins!!! Well done :)");
+            }
+            else if (white.state == "Flying" && white.onBoard < 3)
+            {
+                // game over - Black wins 
+                Console.Clear();
+                Console.WriteLine("Black Player wins!!! Well done :)");
+            }
         }
 
         // have a named array for each possible mill
@@ -493,6 +505,32 @@ namespace Morabaraba_2
             }
         }
 
+        static bool chackAdjacency(string ans, string ans1)
+        {
+            bool adjacent = false;
+
+            foreach (string[] mill in availableMills)
+            {
+                if (ans == mill[0] && ans1 == mill[1])
+                {
+                    adjacent = true;
+                }
+                else if(ans == mill[1] && ans1 == mill[2])
+                {
+                    adjacent = true;
+                }
+            }
+
+            if(adjacent == true)
+            {
+                return true; 
+            }
+            else
+            {
+                return false; 
+            }
+        }
+
         static void runGame(Player currentPlayer)
         {
             checkPlayerState(currentPlayer);
@@ -529,7 +567,16 @@ namespace Morabaraba_2
                 {
                     Console.WriteLine(string.Format("Player {0} enter the position you would like to move your cow to.", currentPlayer.name));
                     string ans1 = Console.ReadLine().ToUpper();
-                    ifElse(ans1, currentPlayer); 
+                    // this is where the adjacency test needs to happen
+                    if(chackAdjacency(ans, ans1))
+                    {
+                        ifElse(ans1, currentPlayer);
+                    }
+                    else
+                    {
+                        Console.WriteLine("The position is not valid. Please enter a valid position to place a cow on the board.");
+                        runGame(currentPlayer);
+                    }
                 }
                 else
                 {
